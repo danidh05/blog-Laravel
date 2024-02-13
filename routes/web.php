@@ -17,10 +17,11 @@ use Illuminate\Support\Facades\File as LaravelFile;
 */
 
 Route::get('/', function () {
-    $posts=POST::all();
-
-    return view('posts',['posts'=>$posts]);
+  
+    
+    return view('posts',['posts'=>POST::all()]);
 });
+
 
 Route::get('posts/{post}',function ($slug) {
    return view('post',[
