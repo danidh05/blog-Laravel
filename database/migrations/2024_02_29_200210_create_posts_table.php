@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
-        $table->id();
-        $table->string('title');
-        $table->string('slug')->unique();
-        $table->text('content');
-        $table->date('date');
-        $table->timestamps();
-    });
+            $table->id();
+            $table->string('title');//string has a max of 256 chars
+            $table->text('body');
+            $table->text('excerpt');
+            $table->timestamps();
+            $table->timestamp('published_at')->nullable();
+
+        });
     }
 
     /**
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('posts');
     }
 };
