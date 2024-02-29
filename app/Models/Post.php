@@ -43,21 +43,24 @@ class POST
 
 
 
-    public static function find($slug){
+    public static function findOrFail($slug){
 //of all the blog posts,Find the one with a slug that matches the one that was requested(lli bel arg)
 
 //take all posts
 
-return static::all()->firstWhere('slug',$slug);//where slug equals the given slug as an arg
+$post= static::find($slug);//where slug equals the given slug as an arg
 
-    //     $path = resource_path("posts/{$slug}.html");
-    //      if(!file_exists($path)){
-    //      throw new ModelNotFoundException();
-    // }
-    // return cache()->remember("posts.{$slug}",1200,fn()=> file_get_contents($path));
-  
-    // // return view('post',['post'=>$post]); because now were not returning the view
-    // }
+    
+          if(!$post){
+          throw new ModelNotFoundException();   
+}
+
+return $post;
+}
+
+public static function find($slug){
+
+return static::all()->firstWhere('slug',$slug);
 
 }
 }
